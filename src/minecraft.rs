@@ -1,3 +1,4 @@
+use crate::auth::Data;
 use std::io::Write;
 use std::path::PathBuf;
 use crate::dir;
@@ -33,16 +34,16 @@ pub async fn run() -> Result<(), Box<dyn std::error::Error>> {
 
 
     let dir = dir::launcher()?;
-
+    let data = Data::load()?;
     let config = ConfigBuilder::new(
         &dir,
         "1.21.1".into(),
         lyceris::auth::AuthMethod::Offline {
-            username: "Lyceris".into(), //фикс-------------------------------
+            username: data.username,
             uuid: None,
         },
     )
-        .memory(Memory::Gigabyte(6))
+        .memory(Memory::Gigabyte(data.memory))
         .loader(NeoForge("21.1.233".to_string()).into())
         .build();
 
