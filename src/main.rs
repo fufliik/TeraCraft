@@ -3,8 +3,6 @@ mod update;
 mod dir;
 mod mods;
 mod auth;
-
-use std::io::Write;
 use crate::auth::Data;
 
 #[tokio::main]
@@ -13,7 +11,7 @@ async fn  main() {
     match tokio::task::spawn_blocking(||{
         update::chack();
     }).await {
-        Ok(info) => {println!("Обновление прошло успешно")}
+        Ok(info) => {}
         Err(e) => {println!("Ошибка обновление: {}", e)}
     }
 
@@ -38,24 +36,23 @@ async fn  main() {
                 println!("Ник: {}", data.username);
                 println!("ОЗУ: {}", data.memory);
                 println!("Билд: v{}",update::VERSION)
-
             }
-            "username" | "u" | "г" | "гыуктфьу" => {
+            "rename" | "r" | "к" | "кутфьу" => {
                 data.username();
                 match  data.save(){
-                    Ok(_) => {println!("Сохранено")}
+                    Ok(_) => {println!("Сохранено: {}",data.username)}
                     Err(e) => {println!("Ошибка: {e}")}
                 }
             }
             "memory" | "m" | "ь" | "ьуьщкн" => {
                 data.memory();
                 match data.save() {
-                    Ok(_) => {println!("Сохранено")}
+                    Ok(_) => {println!("Сохранено: {}", data.memory)}
                     Err(e) => {println!("{e}")}
                 }
             }
             "clean" | "c" | "с" | "сдуфт" =>{
-                clean();
+                clear();
                 titel()
             }
             _ => {}
@@ -66,10 +63,17 @@ async fn  main() {
 
 fn titel(){
     println!("GlavaLauncher");
+    println!("[==================КОМАНДЫ======================]");
+    println!("start  | s => Запустить игру. ");
+    println!("rename | r => Изменить никнейм.");
+    println!("memory | m => Изменить объем оперативной памяти.");
+    println!("clean  | c => Очистить терминал.");
+    println!("info   | i => Информация. ");
+    println!("[===============================================]");
 
 }
 
-pub fn clean() {
-    print!("\x1B[2J\x1B[1;1H");
-    std::io::stdout().flush().unwrap();
+pub fn clear() {
+    std::process::Command::new("cmd").args(["/c","cls"]).status().unwrap();
+
 }

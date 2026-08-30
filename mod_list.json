@@ -1,0 +1,27 @@
+[
+  {
+      "name": "test.jar",
+      "url":"https//test.com",
+      "hash": "123456789"
+    },
+    {
+      "name": "test2.jar",
+      "url":"https//test2.com",
+      "hash": "123456789_2"
+    },
+    {
+      "name": "test2.jar",
+      "url":"https//test2.com",
+      "hash": "123456789_2"
+    },
+    {
+      "name": "test2.jar",
+      "url":"https//test2.com",
+      "hash": "123456789_2"
+    },
+    {
+      "name": "test2.jar",
+      "url":"https//test2.com",
+      "hash": "123456789_2"
+    }
+]  

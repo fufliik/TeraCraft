@@ -9,8 +9,8 @@ pub struct Data{
 
 impl Data{
     pub fn username(&mut self)  {
+        print!("Введите никнейм: ");
         loop{
-            println!("Введите никнейм: ");
             let mut input = String::new();
             std::io::stdin().read_line(&mut input).unwrap();
             let len = input.trim().len();
@@ -37,6 +37,7 @@ impl Data{
                 Ok(_) => {}
                 Err(_) => {println!("Error memory");} //норм текст здеалть
             }
+
         }
     }
 
